@@ -127,8 +127,8 @@ plt.show()
 
 ```python
 time = 3
-out = morphology_dilate(otsu, repeat=time)
-out = morphology_erode(out, repeat=time)
+out = morphology_erode(otsu, repeat=time)
+out = morphology_dilate(out, repeat=time)
 
 out = np.abs(otsu - out) * 255
                 
@@ -160,8 +160,8 @@ plt.show()
 
 ```python
 time = 3
-out = morphology_erode(otsu, repeat=time)
-out = morphology_dilate(out, repeat=time)
+out = morphology_dilate(otsu, repeat=time)
+out = morphology_erode(out, repeat=time)
 
 out = np.abs(otsu - out) * 255
                 

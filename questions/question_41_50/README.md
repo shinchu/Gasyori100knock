@@ -498,7 +498,7 @@ imori.jpgを大津の二値化したものに、モルフォロジー処理に�
 
 モルフォロジー処理の膨張(Dilation)アルゴリズムは、 注目画素I(x, y)=0で、I(x, y-1), I(x-1, y), I(x+1, y), I(x, y+1)のどれか一つが255なら、I(x, y) = 255 とする。
 
-<img src="images/morphology_erode.png" width=200>
+<img src="images/morphology_dilate.png" width=200>
 
 つまり、上の処理を2回行えば2マス分膨張できることになる。
 
@@ -506,23 +506,22 @@ imori.jpgを大津の二値化したものに、モルフォロジー処理に�
 
 
 ```python
-def morphology_erode(img, repeat=1):
+def morphology_dilate(img, repeat=1):
     h, w = img.shape
-    out = img.copy()
 
     # kernel
     mf = np.array(((0, 1, 0),
                 (1, 0, 1),
                 (0, 1, 0)), dtype=int)
 
-    # each erode
+    # each dilate time
+    out = img.copy()
     for i in range(repeat):
         tmp = np.pad(out, (1, 1), 'edge')
-        # erode
-        for y in range(1, h + 1):
-            for x in range(1, w + 1):
-                if np.sum(mf * tmp[y-1:y+2, x-1:x+2]) < 255*4:
-                    out[y-1, x-1] = 0
+        for y in range(1, h+1):
+            for x in range(1, w+1):
+                if np.sum(mf * tmp[y-1:y+2, x-1:x+2]) >= 255:
+                    out[y-1, x-1] = 255
 
     return out
 
@@ -556,26 +555,27 @@ imori.jpgを大津の二値化したものに、モルフォロジー処理に�
 
 収縮処理は例えば、[[0,1,0], [1,0,1], [0,1,0]] のフィルタを掛けた和が255*4未満なら収縮である、と考えることもできる。
 
-<img src="images/morphology_dilate.png" width=200>
+<img src="images/morphology_erode.png" width=200>
 
 
 ```python
-def morphology_dilate(img, repeat=1):
+def morphology_erode(img, repeat=1):
     h, w = img.shape
+    out = img.copy()
 
     # kernel
     mf = np.array(((0, 1, 0),
                 (1, 0, 1),
                 (0, 1, 0)), dtype=int)
 
-    # each dilate time
-    out = img.copy()
+    # each erode
     for i in range(repeat):
         tmp = np.pad(out, (1, 1), 'edge')
-        for y in range(1, h+1):
-            for x in range(1, w+1):
-                if np.sum(mf * tmp[y-1:y+2, x-1:x+2]) >= 255:
-                    out[y-1, x-1] = 255
+        # erode
+        for y in range(1, h + 1):
+            for x in range(1, w + 1):
+                if np.sum(mf * tmp[y-1:y+2, x-1:x+2]) < 255*4:
+                    out[y-1, x-1] = 0
 
     return out
 
@@ -614,8 +614,8 @@ plt.show()
 
 ```python
 time = 1
-out = morphology_dilate(otsu, repeat=time)
-out = morphology_erode(out, repeat=time)
+out = morphology_erode(otsu, repeat=time)
+out = morphology_dilate(out, repeat=time)
 
 plt.subplot(1, 3, 1)
 plt.title("input")
@@ -648,9 +648,8 @@ Canny検出した後に、クロージング処理(N=1)を行え。
 
 ```python
 time = 1
-out = morphology_erode(otsu, repeat=time)
-out = morphology_dilate(out, repeat=time)
-
+out = morphology_dilate(otsu, repeat=time)
+out = morphology_erode(out, repeat=time)
 
 plt.subplot(1, 3, 1)
 plt.title("input")
