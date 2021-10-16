@@ -11,7 +11,8 @@
 - 【注意】このページを利用して、または関して生じた事に関しては、私は一切責任を負いません。すべて**自己責任**でお願い致します。
 - **あくまで趣味ベースで作ったものなので、プルリクエストは受け付けてますが依頼などは一切受け付けません
 そこをご理解頂けた方のみご利用下さい**
-- 各アルゴリズムの精度は保証しません（これはあくまで中身理解のためのものです。ここのアルゴリズムに間違いがある場合もあります。）。各アルゴリズム、ライブラリのライセンスはそれぞれのライセンスに準拠します。
+- 各アルゴリズムの精度は保証しません（これはあくまで中身理解のためのものです。ここのアルゴリズムに間違いがある場合もあります。）。
+- 各アルゴリズム、ライブラリのライセンスはそれぞれのライセンスに従って下さい。
 
 
 
@@ -142,13 +143,8 @@ img = io.imread('https://yoyoyo-yo.github.io/Gasyori100knock/dataset/images/imor
 | 95 | [ニューラルネットワーク (Step.1) 使ってみる](questions/question_91_100#q95-ニューラルネットワーク-step1-使ってみる) || 100 | [簡単な物体検出 (Step.4) 評価 Precision, Recall, F-score, mAP](questions/question_91_100#q100-簡単な物体検出-step4-評価-precision-recall-f-score-map)
 
 
-## TODO
-
-adaptivebinalizatino, poison image blending, saliency map
-
 
 ## License
 
 - This is MIT License https://github.com/yoyoyo-yo/Gasyori100knock/blob/master/LICENSE
-- OpenCV is Apache License Version 2.0 https://github.com/opencv/opencv/blob/master/LICENSE
-- opencv-python is MIT License https://github.com/opencv/opencv-python/blob/master/LICENSE.txt
+- The licenses of each algorithm and library are depend on each license.
