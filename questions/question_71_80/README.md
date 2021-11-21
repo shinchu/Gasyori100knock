@@ -117,13 +117,13 @@ def morphology_dilate(img, repeat=1):
     return out
 
 def morphology_open(img, repeat=1):
-    out = morphology_dilate(img, repeat=repeat)
     out = morphology_erode(out, repeat=repeat)
+    out = morphology_dilate(img, repeat=repeat)
     return out
 
 def morphology_close(img, repeat=1):
-    out = morphology_erode(img, repeat=repeat)
     out = morphology_dilate(out, repeat=repeat)
+    out = morphology_erode(img, repeat=repeat)
     return out
 
 
